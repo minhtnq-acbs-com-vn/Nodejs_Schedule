@@ -1,7 +1,7 @@
 import * as mqtt from "mqtt";
 
 const brokerConfig = {
-  host: "192.168.68.116",
+  host: "100.74.56.58",
   username: "pi",
   password: "Kou-chan1153",
   clientId: "PacketFilterandForwarder",
