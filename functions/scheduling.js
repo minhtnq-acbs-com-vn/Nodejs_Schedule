@@ -124,13 +124,13 @@ const CreateCron = async id => {
 const RunGoCommand = (id, toggle, cronjob, op, repeat) => {
   if (repeat === "yes") {
     execSync(
-      `go run main.go -id ${id} -toggle ${toggle} -cronjob ${cronjob} -op ${op}`
+      `cd /home/pi/Desktop/go && /usr/local/go/bin/go run main.go -id ${id} -toggle ${toggle} -cronjob ${cronjob} -op ${op}`
     );
   }
   if (repeat === "no") {
     cronjob += ` && cd /home/pi/Desktop/go && /usr/local/go/bin/go run main.go -id ${id} -toggle ${toggle} -cronjob ${cronjob} -op delete && cd`;
     execSync(
-      `go run main.go -id ${id} -toggle ${toggle} -cronjob ${cronjob} -op ${op}`
+      `cd /home/pi/Desktop/go && /usr/local/go/bin/go run main.go -id ${id} -toggle ${toggle} -cronjob ${cronjob} -op ${op}`
     );
   }
 };
