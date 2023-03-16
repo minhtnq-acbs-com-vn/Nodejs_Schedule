@@ -19,8 +19,6 @@ client.on("connect", () => SubscribeToTopics());
 client.on("message", (topic, message) =>
   RequestHandler(topic, message.toString())
 );
-client.on("error", err => {
-  console.error(err);
-});
+client.on("error", err => console.error(err));
 
-export { client, dotenv };
+export { client };
