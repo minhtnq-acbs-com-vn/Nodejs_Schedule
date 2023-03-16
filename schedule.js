@@ -7,7 +7,7 @@ let client = mqtt.connect({
   host: process.env.brokerHost,
   username: process.env.brokerUname,
   password: process.env.brokerPassword,
-  clientId: "Nodejs_Schedule",
+  clientId: "Nodejs_ScheduleLocal",
   port: 1883,
   clean: true,
   connectTimeout: 1000,
