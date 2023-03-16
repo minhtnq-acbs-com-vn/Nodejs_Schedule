@@ -1,9 +1,7 @@
 import axios from "axios";
 
-import { requestRoomDevice, requestSchedule } from "../config/apiUrl.js";
-
 const getRoomDevice = async roomName => {
-  let result = await axios.get(requestRoomDevice + roomName);
+  let result = await axios.get(process.env.requestRoomDevice + roomName);
   let newArr = result.data.map(obj => ({
     deviceModule: obj.deviceModule,
     subscribe: obj.topic.subscribe,
@@ -17,7 +15,7 @@ const getRoomDevice = async roomName => {
 };
 
 const getSchedule = async id => {
-  let result = await axios.get(requestSchedule + id);
+  let result = await axios.get(process.env.requestSchedule + id);
   return result.data[0];
 };
 

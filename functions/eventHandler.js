@@ -1,9 +1,8 @@
 import { client } from "../index.js";
-import { subTopic } from "../config/init.js";
 import { CreateCron } from "./scheduling.js";
 
 const SubscribeToTopics = () => {
-  client.subscribe(subTopic);
+  client.subscribe(process.env.subTopic);
   console.log("Wait for messages");
 };
 
