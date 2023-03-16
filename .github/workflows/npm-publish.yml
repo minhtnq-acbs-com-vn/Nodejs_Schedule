@@ -38,5 +38,5 @@ jobs:
             mkdir config
             echo "${{ secrets.AWS_ENV }}" > ./config/config.env
             npm install
-            sudo pm2 delete index
-            sudo pm2 start index.js
+            sudo pm2 delete schedule
+            sudo pm2 start schedule.js
