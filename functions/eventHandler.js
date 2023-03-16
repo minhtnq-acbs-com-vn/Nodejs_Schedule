@@ -1,4 +1,4 @@
-import { client } from "../index.js";
+import { client } from "../schedule.js";
 import { CreateCron } from "./scheduling.js";
 
 const SubscribeToTopics = () => {
