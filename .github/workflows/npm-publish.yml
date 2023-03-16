@@ -1,0 +1,42 @@
+name: AWS Deployment
+
+on:
+  push:
+    branches: ["master"]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"          
+          
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@5.2.1
+        with:
+          switches: -avzr --delete --exclude-from='deployexclude'
+          path: ./
+          remote_path: ./helpers/NodeJS_Schedule/
+          remote_host: ${{ secrets.AWS_HOST }}
+          remote_user: ${{ secrets.AWS_UNAME }}
+          remote_key: ${{ secrets.AWS_PRIVATEKEY }}
+          port: 22
+
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.AWS_UNAME }}
+          key: ${{ secrets.AWS_PRIVATEKEY }}
+          script: |
+            cd ./helpers/NodeJS_Schedule/
+            mkdir config
+            echo "${{ secrets.AWS_ENV }}" > ./config/config.env
+            npm install
+            sudo pm2 delete index
+            sudo pm2 start index.js
