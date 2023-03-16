@@ -2,7 +2,7 @@ import axios from "axios";
 
 const Auth = async () => {
   let result = await axios.post(
-    process.env.requestAuth,
+    `${process.env.requestAuth}`,
     {
       email: `${process.env.email}`,
       password: `${process.env.password}`,
@@ -17,7 +17,7 @@ const Auth = async () => {
 };
 
 const getRoomDevice = async roomName => {
-  let result = await axios.get(process.env.requestRoomDevice + roomName);
+  let result = await axios.get(`${process.env.requestRoomDevice}` + roomName);
   let newArr = result.data.map(obj => ({
     deviceModule: obj.deviceModule,
     subscribe: obj.topic.subscribe,
@@ -32,7 +32,7 @@ const getRoomDevice = async roomName => {
 
 const getSchedule = async id => {
   let token = await Auth();
-  let result = await axios.get(process.env.requestSchedule + id, {
+  let result = await axios.get(`${process.env.requestSchedule}` + id, {
     headers: {
       auth: token,
     },
