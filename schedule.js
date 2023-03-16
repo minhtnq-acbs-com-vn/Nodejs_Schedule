@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
-dotenv.config({ path: "./config/config.env" });
 import * as mqtt from "mqtt";
 import { RequestHandler, SubscribeToTopics } from "./functions/eventHandler.js";
+dotenv.config({ path: "./config/config.env" });
 
 let client = mqtt.connect({
   host: process.env.brokerHost,
@@ -18,6 +18,7 @@ client.on("connect", () => SubscribeToTopics());
 client.on("message", (topic, message) =>
   RequestHandler(topic, message.toString())
 );
+
 client.on("error", err => console.error(err));
 
 export { client };
