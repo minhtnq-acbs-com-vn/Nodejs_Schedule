@@ -40,3 +40,4 @@ jobs:
             npm install
             sudo pm2 delete schedule
             sudo pm2 start schedule.js
+            sudo pm2 save
