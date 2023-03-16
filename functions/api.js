@@ -1,4 +1,7 @@
 import axios from "axios";
+import { generateToken } from "./jwt.js";
+
+axios.defaults.headers.common["auth"] = generateToken(process.env.api_key, 3);
 
 const getRoomDevice = async roomName => {
   let result = await axios.get(process.env.requestRoomDevice + roomName);
