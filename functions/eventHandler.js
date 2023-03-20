@@ -11,7 +11,8 @@ const RequestHandler = (topic, message) => {
   if (
     message.startsWith("schedule") &&
     message.search(":") !== -1 &&
-    message.search("-") !== -1
+    message.search("-") !== -1 &&
+    message.search("@") !== -1
   )
     CreateCron(message);
 };

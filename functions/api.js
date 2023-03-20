@@ -8,11 +8,12 @@ const request = async () => {
   return response.headers.auth;
 };
 
-const getRoomDevice = async roomName => {
+const getRoomDevice = async (roomName, userid) => {
   let token = await request();
   let result = await axios.get(process.env.requestRoomDevice + roomName, {
     headers: {
       auth: token,
+      userid: userid,
     },
   });
   let newArr = result.data.map(obj => ({
@@ -27,11 +28,12 @@ const getRoomDevice = async roomName => {
   return newArr[0];
 };
 
-const getSchedule = async id => {
+const getSchedule = async (id, userid) => {
   let token = await request();
   let result = await axios.get(process.env.requestSchedule + id, {
     headers: {
       auth: token,
+      userid: userid,
     },
   });
   return result.data[0];

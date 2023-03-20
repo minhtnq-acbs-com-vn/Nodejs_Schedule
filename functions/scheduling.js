@@ -95,8 +95,9 @@ const CreateCronObject = (loopTime, req) => {
 
 const CreateCron = async id => {
   let docID = id.slice(id.indexOf(":") + 1, id.indexOf("-"));
-  let schedule = await getSchedule(docID);
-  let device = await getRoomDevice(schedule.room);
+  let uid = id.slice(id.indexOf("@") + 1);
+  let schedule = await getSchedule(docID, uid);
+  let device = await getRoomDevice(schedule.room, uid);
 
   if (id.indexOf("(") !== -1) {
     let docDel = id.slice(id.indexOf("(") + 1, id.indexOf(")"));
