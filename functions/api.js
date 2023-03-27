@@ -1,18 +1,9 @@
 import axios from "axios";
 
-const request = async () => {
-  let response = await axios.post(process.env.requestToken, {
-    email: process.env.email,
-    password: process.env.password,
-  });
-  return response.headers.auth;
-};
-
 const getRoomDevice = async (roomName, userid) => {
-  let token = await request();
   let result = await axios.get(process.env.requestRoomDevice + roomName, {
     headers: {
-      auth: token,
+      system: process.env.systemKey,
       userid: userid,
     },
   });
@@ -29,10 +20,9 @@ const getRoomDevice = async (roomName, userid) => {
 };
 
 const getSchedule = async (id, userid) => {
-  let token = await request();
   let result = await axios.get(process.env.requestSchedule + id, {
     headers: {
-      auth: token,
+      system: process.env.systemKey,
       userid: userid,
     },
   });
