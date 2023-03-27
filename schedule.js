@@ -15,6 +15,7 @@ let client = mqtt.connect({
 });
 
 client.on("connect", () => SubscribeToTopics());
+
 client.on("message", (topic, message) =>
   RequestHandler(topic, message.toString())
 );
