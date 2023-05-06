@@ -85,7 +85,7 @@ const CreateCronObject = (loopTime, req) => {
       RunGoCommand(
         req.id,
         expression.order[i],
-        `${expression.expression[i]} mosquitto_pub -h localhost -t '${req.topic}' -m '${req.request}' -u '${process.env.brokerUname}' -P '${process.env.brokerPassword}'`,
+        `${expression.expression[i]} mosquitto_pub -h localhost -t '${req.topic}' -m '${req.request[i]}' -u '${process.env.brokerUname}' -P '${process.env.brokerPassword}'`,
         "create",
         req.rerun
       );
