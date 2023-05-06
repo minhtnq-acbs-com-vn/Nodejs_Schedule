@@ -16,7 +16,7 @@ const getRoomDevice = async (roomName, userid) => {
     ack: obj.ack,
   }));
 
-  return newArr[0];
+  return newArr[1];
 };
 
 const getSchedule = async (id, userid) => {

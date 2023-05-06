@@ -16,6 +16,7 @@
     "dotenv": "^16.0.3",
     "jsonwebtoken": "^9.0.0",
     "mqtt": "^4.3.7",
-    "node-cron": "^3.0.2"
+    "node-cron": "^3.0.2",
+    "nodemon": "^2.0.22"
   }
 }
