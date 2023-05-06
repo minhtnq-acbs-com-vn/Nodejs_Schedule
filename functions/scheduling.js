@@ -62,7 +62,7 @@ const CreateCronObject = (loopTime, req) => {
       "on",
       `${expression.expression} mosquitto_pub -h localhost -t '${req.topic}' -m '${req.request}' -u '${process.env.brokerUname}' -P '${process.env.brokerPassword}'`,
       "create",
-      req.repeat
+      req.rerun
     );
   }
   if (expression.type === "singleOff") {
@@ -72,7 +72,7 @@ const CreateCronObject = (loopTime, req) => {
       "off",
       `${expression.expression} mosquitto_pub -h localhost -t '${req.topic}' -m '${req.request}' -u '${process.env.brokerUname}' -P '${process.env.brokerPassword}'`,
       "create",
-      req.repeat
+      req.rerun
     );
   }
   if (expression.type === "multiple") {
@@ -87,7 +87,7 @@ const CreateCronObject = (loopTime, req) => {
         expression.order[i],
         `${expression.expression[i]} mosquitto_pub -h localhost -t '${req.topic}' -m '${req.request}' -u '${process.env.brokerUname}' -P '${process.env.brokerPassword}'`,
         "create",
-        req.repeat
+        req.rerun
       );
     }
   }
@@ -110,26 +110,26 @@ const CreateCron = async id => {
       dayOfTheWeek: schedule.dayOfTheWeek,
       timeOn: schedule.timeOn,
       timeOff: schedule.timeOff,
-      repeat: schedule.repeat,
+      rerun: schedule.rerun,
     },
     {
       id: schedule._id,
       topic: device.subscribe,
       request: schedule.request,
-      repeat: schedule.repeat,
+      rerun: schedule.rerun,
     }
   );
 
   if (cronJob === false) console.log("something wrong with creating cron");
 };
 
-const RunGoCommand = (id, toggle, cronjob, op, repeat) => {
-  if (repeat === "yes") {
+const RunGoCommand = (id, toggle, cronjob, op, rerun) => {
+  if (rerun === "yes") {
     execSync(
       `cd /home/ubuntu/helpers/go-crontab-manipulate && ./main -id ${id} -toggle ${toggle} -cronjob "${cronjob}" -op ${op}`
     );
   }
-  if (repeat === "no") {
+  if (rerun === "no") {
     cronjob += ` && cd /home/ubuntu/helpers/go-crontab-manipulate && ./main -id ${id} -toggle ${toggle} -cronjob "delete" -op delete && cd`;
     execSync(
       `cd /home/ubuntu/helpers/go-crontab-manipulate && ./main -id ${id} -toggle ${toggle} -cronjob "${cronjob}" -op ${op}`
