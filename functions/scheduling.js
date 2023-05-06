@@ -78,7 +78,7 @@ const CreateCronObject = (loopTime, req) => {
   if (expression.type === "multiple") {
     let reqArr = [
       req.request.slice(0, req.request.indexOf(",")),
-      req.request.slice(req.request.indexOf(",") + 1),
+      req.request.slice(req.request.indexOf(",") + 2),
     ];
     for (let i = 0; i < expression.expression.length; i++) {
       if (cron.validate(expression.expression[i]) !== true) return false;
